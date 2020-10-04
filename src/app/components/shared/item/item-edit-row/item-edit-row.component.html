@@ -1,0 +1,18 @@
+
+<form class="columns" (ngSubmit)="doSubmit()" [formGroup]="f">
+  <div class="column">{{ item.id }}</div>
+  <div class="column">
+    <div class="control">
+      <input class="input is-small" type="text" formControlName="title" />
+    </div>
+  </div>
+  <div class="column">
+    <div class="control">
+      <input class="input is-small" type="text" formControlName="content" />
+    </div>
+  </div>
+  <div class="column buttons">
+    <input type="submit" class="button is-small is-info" value="Save" />
+    <button class="button is-small is-danger" (click)="doCancelItemEdit()">Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+
+<h3>Create new Item.</h3>
+
+<form [formGroup]="f" (ngSubmit)="submitForm()">
+
+  <div class="field">
+    <label class="label" for="id">Id</label>
+    <div class="control">
+      <input class="input" id="id" formControlName="id" type="text" placeholder="Item Id">
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="title">Title</label>
+    <div class="control">
+      <input class="input" id="title" formControlName="title" type="text" placeholder="Item Title">
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="content">Content</label>
+    <div class="control">
+      <input class="input" id="content" formControlName="content" type="text" placeholder="Item Content">
+    </div>
+  </div>
+
+  <div class="control">
+    <input type="submit" class="button is-info" value="Create">
+  </div>
+
+</form>

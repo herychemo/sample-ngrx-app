@@ -1,0 +1,10 @@
+
+<div class="columns">
+  <div class="column">{{ item.id }}</div>
+  <div class="column">{{ item.title }}</div>
+  <div class="column">{{ item.content }}</div>
+  <div class="column buttons">
+    <button class="button is-small is-info" (click)="doEditItem(item.id)">Edit</button>
+    <button class="button is-small is-danger" (click)="doDeleteItem(item.id)">Delete</button>
+  </div>
+</div>

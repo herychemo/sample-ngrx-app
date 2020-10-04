@@ -1,0 +1,26 @@
+
+<div class="columns">
+  <div class="column">Id</div>
+  <div class="column">Title</div>
+  <div class="column">Content</div>
+  <div class="column">Action</div>
+</div>
+
+<ng-container *ngFor="let item of items">
+
+  <app-item-view-row
+    *ngIf="item.id !== editItemId"
+    [item]="item"
+    (editItem)="doEditItem($event)"
+    (deleteItem)="doDeleteItem($event)"
+  ></app-item-view-row>
+
+  <app-item-edit-row
+    *ngIf="item.id === editItemId"
+    [item]="item"
+    (saveItem)="doSaveItem($event)"
+    (cancelItemEdit)="doCancelItemEdit()"
+  ></app-item-edit-row>
+
+</ng-container>
+

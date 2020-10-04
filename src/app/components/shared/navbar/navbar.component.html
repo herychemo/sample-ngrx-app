@@ -1,1 +1,32 @@
-<p>navbar works!</p>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      NgRx Samples
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu"
+       aria-expanded="false" data-target="appNavbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="appNavbar" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" routerLinkActive="is-active" [routerLink]="['/simple']">
+        Simple No NgRx
+      </a>
+
+      <a class="navbar-item" routerLinkActive="is-active" [routerLink]="['/store']">
+        With NgRx Store
+      </a>
+
+      <a class="navbar-item" routerLinkActive="is-active" [routerLink]="['/effects']">
+        With NgRx Effects
+      </a>
+
+    </div>
+  </div>
+</nav>

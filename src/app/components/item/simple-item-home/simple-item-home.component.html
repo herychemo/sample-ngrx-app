@@ -1,0 +1,12 @@
+
+<app-item-list
+  [items]="items" [editItemId]="editItemId"
+  (editItem)="editItem($event)"
+  (deleteItem)="deleteItem($event)"
+  (saveItem)="saveItem($event)"
+  (cancelItemEdit)="cancelItemEdit()"
+></app-item-list>
+
+<div class="columns">
+  <app-item-form class="column is-6" (newItem)="saveItem($event)"></app-item-form>
+</div>
