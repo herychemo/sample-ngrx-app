@@ -10,6 +10,8 @@ import { ItemListComponent } from './components/shared/item/item-list/item-list.
 import { ItemEditRowComponent } from './components/shared/item/item-edit-row/item-edit-row.component';
 import { ItemViewRowComponent } from './components/shared/item/item-view-row/item-view-row.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { StoreItemHomeComponent } from './components/item/store-item-home/store-item-home.component';
+import { EffectsItemHomeComponent } from './components/item/effects-item-home/effects-item-home.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     SimpleItemHomeComponent,
     ItemListComponent,
     ItemEditRowComponent,
-    ItemViewRowComponent
+    ItemViewRowComponent,
+    StoreItemHomeComponent,
+    EffectsItemHomeComponent
   ],
   imports: [
     BrowserModule,
