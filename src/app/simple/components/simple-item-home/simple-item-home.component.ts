@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {mergeMap} from 'rxjs/operators';
-import {DataService, Item} from '../../../services/data.service';
+import { mergeMap } from 'rxjs/operators';
+import { DataService } from '../../../services/data.service';
+import { Item } from '../../../model/item';
 
 @Component({
   selector: 'app-simple-item-home',

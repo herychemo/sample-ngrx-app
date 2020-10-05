@@ -1,5 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Item } from '../model/item';
 
 @Injectable({
   providedIn: 'root'
@@ -60,10 +61,4 @@ export class DataService {
     return of(this.removeAll());
   }
 
-}
-
-export interface Item {
-  id: string;
-  title: string;
-  content: string;
 }

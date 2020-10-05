@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Item} from '../../../../services/data.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Item } from '../../../../model/item';
 
 @Component({
   selector: 'app-item-view-row',
