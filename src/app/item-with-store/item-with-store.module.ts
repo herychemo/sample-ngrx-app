@@ -19,7 +19,7 @@ import { ItemWithStoreRouterModule } from './item-with-store.routing';
     ItemWithStoreRouterModule,
     ItemUiCoreModule,
 
-    StoreModule.forFeature('withState', itemsReducer),
+    StoreModule.forFeature('withStore', itemsReducer),
   ]
 })
 export class ItemWithStoreModule { }

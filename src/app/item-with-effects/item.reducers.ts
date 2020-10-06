@@ -2,7 +2,12 @@ import { createReducer, on } from '@ngrx/store';
 import {
   cancelEditItem, editItem, reloadItemsDone
 } from './item.actions';
-import { ItemWithEffectsState } from './item-with-effects-state';
+import { ItemWithEffectsState } from './item-with-effects.state';
+import * as fromRoot from '../app-root.reducers';
+
+export interface State extends fromRoot.State {
+  withEffects: ItemWithEffectsState;
+}
 
 
 const initialState: ItemWithEffectsState = {

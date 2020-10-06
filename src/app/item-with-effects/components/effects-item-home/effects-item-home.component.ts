@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {createFeatureSelector, createSelector, select, Store} from '@ngrx/store';
+
+import * as fromFeature from '../../item.reducers';
 import { Item } from '../../../item-data/model/item';
 import {
   cancelEditItem, deleteItemRequest, editItem, reloadItemsRequest, saveItemRequest
 } from '../../item.actions';
-import { ItemWithEffectsState } from '../../item-with-effects-state';
+import { ItemWithEffectsState } from '../../item-with-effects.state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,8 +18,7 @@ import { Observable } from 'rxjs';
 export class EffectsItemHomeComponent implements OnInit {
 
   private readonly featureSelector =
-    createFeatureSelector<{ withEffects: ItemWithEffectsState }, ItemWithEffectsState>
-    ('withEffects');
+    createFeatureSelector<fromFeature.State, ItemWithEffectsState>('withEffects');
 
   items$: Observable<Item[]> = this.store.pipe(
     select(
@@ -31,7 +32,7 @@ export class EffectsItemHomeComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<{withEffects: ItemWithEffectsState}>) {
+    private store: Store<fromFeature.State>) {
     this.cancelItemEdit();
   }
 

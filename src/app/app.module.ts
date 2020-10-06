@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { StoreModule } from '@ngrx/store';
 
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import {EffectsModule} from '@ngrx/effects';
+import { errorMessageReducer } from './app-root.reducers';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {EffectsModule} from '@ngrx/effects';
     AppRoutingModule,
 
     StoreModule.forRoot({
-      router: routerReducer
+      router: routerReducer,
+      errorMessage: errorMessageReducer
     }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

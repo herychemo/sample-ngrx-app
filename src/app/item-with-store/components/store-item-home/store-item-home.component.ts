@@ -7,8 +7,9 @@ import {
   editItem,
   cancelEditItem,
 } from '../../item.actions';
+import * as fromFeature from '../../item.reducers';
 import { Item } from '../../../item-data/model/item';
-import { ItemWithStoreState } from '../../item-with-store-state';
+import { ItemWithStoreState } from '../../item-with-store.state';
 import { Observable } from 'rxjs';
 
 
@@ -21,8 +22,7 @@ import { Observable } from 'rxjs';
 export class StoreItemHomeComponent implements OnInit {
 
   private readonly featureSelector =
-    createFeatureSelector<{ withState: ItemWithStoreState }, ItemWithStoreState>
-    ('withState');
+    createFeatureSelector<fromFeature.State, ItemWithStoreState>('withStore');
 
   items$: Observable<Item[]> = this.store.pipe(
     select(
@@ -36,7 +36,7 @@ export class StoreItemHomeComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<{withState: ItemWithStoreState}>) {
+    private store: Store<{withStore: ItemWithStoreState}>) {
     this.cancelItemEdit();
   }
 
