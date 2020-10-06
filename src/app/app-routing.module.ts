@@ -1,31 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SimpleItemHomeComponent} from './simple/components/simple-item-home/simple-item-home.component';
-import {StoreItemHomeComponent} from './store/components/store-item-home/store-item-home.component';
-import {EffectsItemHomeComponent} from './effects/components/effects-item-home/effects-item-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'standard',
+    redirectTo: 'withoutNgRxState',
     pathMatch: 'full'
   },
   {
-    component: SimpleItemHomeComponent,
-    path: 'standard'
+    path: 'withoutNgRxState',
+    loadChildren: () => import('./item-no-store/item-no-store.module')
+      .then(m => m.ItemNoStoreModule),
   },
   {
-    component: StoreItemHomeComponent,
-    path: 'store'
+    path: 'withStore',
+    loadChildren: () => import('./item-with-store/item-with-store.module')
+      .then(m => m.ItemWithStoreModule),
   },
   {
-    component: EffectsItemHomeComponent,
-    path: 'effects'
+    path: 'withStoreAndEffects',
+    loadChildren: () => import('./item-with-effects/item-with-effects.module')
+      .then(m => m.ItemWithEffectsModule),
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'standard'
+    redirectTo: 'withoutNgRxState'
   }
 ];
 
