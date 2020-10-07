@@ -3,4 +3,8 @@
   <app-navbar></app-navbar>
 
   <router-outlet></router-outlet>
+
+  <div class="has-text-danger mt-4">
+    {{ errorMessage$ | async }}
+  </div>
 </div>

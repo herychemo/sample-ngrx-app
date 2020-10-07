@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from '../../../item-data/model/item';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-edit-row',
@@ -21,9 +22,21 @@ export class ItemEditRowComponent implements OnInit {
   @Output()
   cancelItemEdit: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  formError: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  clearFormError: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     this.createForm();
+
+    this.f.statusChanges.pipe(
+      filter(value => value === 'VALID' || value === 'INVALID'),
+      map(value => value === 'VALID'),
+      filter(value => value),
+    ).subscribe(_ => this.doClearFormError());
   }
 
   private createForm(): void {
@@ -41,9 +54,17 @@ export class ItemEditRowComponent implements OnInit {
     this.cancelItemEdit.emit();
   }
 
+  doFormError(errorMessage: string): void {
+    this.formError.emit(errorMessage);
+  }
+
+  doClearFormError(): void {
+    this.clearFormError.emit();
+  }
+
   doSubmit(): void {
     if (this.f.invalid) {
-      console.log('Input refused.');
+      this.doFormError('Input Refused');
       return;
     }
     this.doSaveItem({

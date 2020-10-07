@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from '../../../item-data/model/item';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-form',
@@ -15,9 +16,21 @@ export class ItemFormComponent implements OnInit {
   @Output()
   newItem: EventEmitter<Item> = new EventEmitter<Item>();
 
+  @Output()
+  formError: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  clearFormError: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     this.createForm();
+
+    this.f.statusChanges.pipe(
+      filter(value => value === 'VALID' || value === 'INVALID'),
+      map(value => value === 'VALID'),
+      filter(value => value),
+    ).subscribe(_ => this.doClearFormError());
   }
 
   private createForm(): void {
@@ -32,9 +45,18 @@ export class ItemFormComponent implements OnInit {
     this.newItem.emit(item);
   }
 
+  doFormError(errorMessage: string): void {
+    this.formError.emit(errorMessage);
+  }
+
+  doClearFormError(): void {
+    this.clearFormError.emit();
+  }
+
   submitForm(): void {
+    console.log(this.f.status);
     if (this.f.invalid) {
-      console.log('Input refused.');
+      this.doFormError('Input Refused');
       return;
     }
     this.doNewItem({

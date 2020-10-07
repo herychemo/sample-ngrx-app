@@ -5,8 +5,14 @@
   (deleteItem)="deleteItem($event)"
   (saveItem)="saveItem($event)"
   (cancelItemEdit)="cancelItemEdit()"
+  (formError)="onFormError($event)"
+  (clearFormError)="doClearError()"
 ></app-item-list>
 
 <div class="columns">
-  <app-item-form class="column is-6" (newItem)="saveItem($event)"></app-item-form>
+  <app-item-form class="column is-6"
+                 (formError)="onFormError($event)"
+                 (clearFormError)="doClearError()"
+                 (newItem)="saveItem($event)"
+  ></app-item-form>
 </div>

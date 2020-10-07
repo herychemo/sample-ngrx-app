@@ -26,6 +26,12 @@ export class ItemListComponent implements OnInit {
   @Output()
   cancelItemEdit: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output()
+  formError: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  clearFormError: EventEmitter<void> = new EventEmitter<void>();
+
   constructor() { }
   ngOnInit(): void {}
 
@@ -43,6 +49,14 @@ export class ItemListComponent implements OnInit {
 
   doCancelItemEdit(): void {
     this.cancelItemEdit.emit();
+  }
+
+  doFormError(errorMessage: string): void {
+    this.formError.emit(errorMessage);
+  }
+
+  doClearError(): void {
+    this.clearFormError.emit();
   }
 
 }

@@ -20,6 +20,8 @@
     [item]="item"
     (saveItem)="doSaveItem($event)"
     (cancelItemEdit)="doCancelItemEdit()"
+    (formError)="doFormError($event)"
+    (clearFormError)="doClearError()"
   ></app-item-edit-row>
 
 </ng-container>

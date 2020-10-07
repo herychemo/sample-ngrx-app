@@ -8,6 +8,7 @@ import {
 } from '../../item.actions';
 import { ItemWithEffectsState } from '../../item-with-effects.state';
 import { Observable } from 'rxjs';
+import {clearError, setError} from '../../../app-root.actions';
 
 @Component({
   selector: 'app-effects-item-home',
@@ -55,4 +56,13 @@ export class EffectsItemHomeComponent implements OnInit {
   cancelItemEdit(): void {
     this.store.dispatch(cancelEditItem());
   }
+
+  onFormError(errorMessage: string): void {
+    this.store.dispatch(setError({ errorMessage }));
+  }
+
+  doClearError(): void {
+    this.store.dispatch(clearError());
+  }
+
 }

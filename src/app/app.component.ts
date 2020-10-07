@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {select, Store} from '@ngrx/store';
+import { AppRootState } from './app-root.state';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sample-ngrx';
+
+  errorMessage$ = this.store.pipe(
+    select(state => state.errorMessage)
+  );
+
+  constructor(private store: Store<AppRootState>) { }
 }

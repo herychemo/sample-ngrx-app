@@ -11,6 +11,7 @@ import * as fromFeature from '../../item.reducers';
 import { Item } from '../../../item-data/model/item';
 import { ItemWithStoreState } from '../../item-with-store.state';
 import { Observable } from 'rxjs';
+import {clearError, setError} from '../../../app-root.actions';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class StoreItemHomeComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<{withStore: ItemWithStoreState}>) {
+    private store: Store<fromFeature.State>) {
     this.cancelItemEdit();
   }
 
@@ -57,4 +58,13 @@ export class StoreItemHomeComponent implements OnInit {
   cancelItemEdit(): void {
     this.store.dispatch(cancelEditItem());
   }
+
+  onFormError(errorMessage: string): void {
+    this.store.dispatch(setError({ errorMessage }));
+  }
+
+  doClearError(): void {
+    this.store.dispatch(clearError());
+  }
+
 }
