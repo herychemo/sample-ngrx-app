@@ -1,9 +1,9 @@
-import { createReducer, on } from '@ngrx/store';
+import {createFeatureSelector, createReducer, on} from '@ngrx/store';
 import {
   cancelEditItem, deleteItem, editItem, saveItem
 } from './item.actions';
 import { ItemWithStoreState } from './item-with-store.state';
-import * as fromRoot from '../app-root.reducers';
+import * as fromRoot from '../../state/app-root.reducers';
 
 export interface State extends fromRoot.State {
   withStore: ItemWithStoreState;

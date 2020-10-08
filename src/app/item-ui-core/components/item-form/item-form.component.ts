@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from '../../../item-data/model/item';
-import { filter, map } from 'rxjs/operators';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-form',
@@ -28,6 +28,7 @@ export class ItemFormComponent implements OnInit {
 
     this.f.statusChanges.pipe(
       filter(value => value === 'VALID' || value === 'INVALID'),
+      distinctUntilChanged(),
       map(value => value === 'VALID'),
       filter(value => value),
     ).subscribe(_ => this.doClearFormError());
@@ -54,7 +55,6 @@ export class ItemFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    console.log(this.f.status);
     if (this.f.invalid) {
       this.doFormError('Input Refused');
       return;

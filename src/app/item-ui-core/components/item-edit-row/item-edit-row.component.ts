@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Item } from '../../../item-data/model/item';
-import { filter, map } from 'rxjs/operators';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-item-edit-row',
@@ -34,6 +34,7 @@ export class ItemEditRowComponent implements OnInit {
 
     this.f.statusChanges.pipe(
       filter(value => value === 'VALID' || value === 'INVALID'),
+      distinctUntilChanged(),
       map(value => value === 'VALID'),
       filter(value => value),
     ).subscribe(_ => this.doClearFormError());

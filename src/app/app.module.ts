@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { errorMessageReducer } from './app-root.reducers';
+import { errorMessageReducer } from './state/app-root.reducers';
 
 @NgModule({
   declarations: [

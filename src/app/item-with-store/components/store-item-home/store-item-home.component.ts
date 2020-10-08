@@ -1,17 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Store, select, createSelector, createFeatureSelector} from '@ngrx/store';
-import {
-  saveItem,
-  deleteItem,
-  editItem,
-  cancelEditItem,
-} from '../../item.actions';
-import * as fromFeature from '../../item.reducers';
 import { Item } from '../../../item-data/model/item';
-import { ItemWithStoreState } from '../../item-with-store.state';
 import { Observable } from 'rxjs';
-import {clearError, setError} from '../../../app-root.actions';
+import { ItemsFacade } from '../../state/items.facade';
+import { ErrorMessageFacade } from '../../../state/error-message.facade';
 
 
 @Component({
@@ -22,49 +14,39 @@ import {clearError, setError} from '../../../app-root.actions';
 })
 export class StoreItemHomeComponent implements OnInit {
 
-  private readonly featureSelector =
-    createFeatureSelector<fromFeature.State, ItemWithStoreState>('withStore');
-
-  items$: Observable<Item[]> = this.store.pipe(
-    select(
-      createSelector(this.featureSelector, (state: ItemWithStoreState) => state.items)
-    )
-  );
-  editItemId$: Observable<string> = this.store.pipe(
-    select(
-      createSelector(this.featureSelector, (state: ItemWithStoreState) => state.editItemId)
-    )
-  );
+  items$: Observable<Item[]> = this.itemsFacade.items$;
+  editItemId$: Observable<string> = this.itemsFacade.editItemId$;
 
   constructor(
-    private store: Store<fromFeature.State>) {
+    private itemsFacade: ItemsFacade,
+    private errorMessageFacade: ErrorMessageFacade) {
     this.cancelItemEdit();
   }
 
   ngOnInit(): void { }
 
   saveItem(item: Item): void {
-    this.store.dispatch(saveItem({ item }));
+    this.itemsFacade.saveItem(item);
   }
 
   editItem(itemId: string): void {
-    this.store.dispatch(editItem({ itemId }));
+    this.itemsFacade.editItem(itemId);
   }
 
   deleteItem(itemId: string): void {
-    this.store.dispatch(deleteItem({ itemId }));
+    this.itemsFacade.deleteItem(itemId);
   }
 
   cancelItemEdit(): void {
-    this.store.dispatch(cancelEditItem());
-  }
-
-  onFormError(errorMessage: string): void {
-    this.store.dispatch(setError({ errorMessage }));
+    this.itemsFacade.cancelItemEdit();
   }
 
   doClearError(): void {
-    this.store.dispatch(clearError());
+    this.errorMessageFacade.clearError();
+  }
+
+  onFormError(errorMessage: string): void {
+    this.errorMessageFacade.setError(errorMessage);
   }
 
 }

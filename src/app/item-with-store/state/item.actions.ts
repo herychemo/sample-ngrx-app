@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Item } from '../item-data/model/item';
+import { Item } from '../../item-data/model/item';
 
 export const saveItem = createAction('[Item][store] Save Item', props<{ item: Item }>());
 export const deleteItem = createAction('[Item][store] Delete Item', props<{ itemId: string }>());

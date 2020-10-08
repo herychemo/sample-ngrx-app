@@ -3,7 +3,7 @@ import {
   cancelEditItem, editItem, reloadItemsDone
 } from './item.actions';
 import { ItemWithEffectsState } from './item-with-effects.state';
-import * as fromRoot from '../app-root.reducers';
+import * as fromRoot from '../../state/app-root.reducers';
 
 export interface State extends fromRoot.State {
   withEffects: ItemWithEffectsState;

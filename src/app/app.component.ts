@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import { AppRootState } from './app-root.state';
+import {ErrorMessageFacade} from './state/error-message.facade';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +8,7 @@ import { AppRootState } from './app-root.state';
 })
 export class AppComponent {
   title = 'sample-ngrx';
+  error$ = this.errorMessageFacade.errorMessage$;
 
-  errorMessage$ = this.store.pipe(
-    select(state => state.errorMessage)
-  );
-
-  constructor(private store: Store<AppRootState>) { }
+  constructor(private errorMessageFacade: ErrorMessageFacade) { }
 }

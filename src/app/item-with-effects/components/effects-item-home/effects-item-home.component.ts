@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {createFeatureSelector, createSelector, select, Store} from '@ngrx/store';
-
-import * as fromFeature from '../../item.reducers';
 import { Item } from '../../../item-data/model/item';
-import {
-  cancelEditItem, deleteItemRequest, editItem, reloadItemsRequest, saveItemRequest
-} from '../../item.actions';
-import { ItemWithEffectsState } from '../../item-with-effects.state';
 import { Observable } from 'rxjs';
-import {clearError, setError} from '../../../app-root.actions';
+import { ErrorMessageFacade } from '../../../state/error-message.facade';
+import { ItemsFacade } from '../../state/items.facade';
 
 @Component({
   selector: 'app-effects-item-home',
@@ -18,51 +12,42 @@ import {clearError, setError} from '../../../app-root.actions';
 })
 export class EffectsItemHomeComponent implements OnInit {
 
-  private readonly featureSelector =
-    createFeatureSelector<fromFeature.State, ItemWithEffectsState>('withEffects');
-
-  items$: Observable<Item[]> = this.store.pipe(
-    select(
-      createSelector(this.featureSelector, (state: ItemWithEffectsState) => state.items)
-    )
-  );
-  editItemId$: Observable<string> = this.store.pipe(
-    select(
-      createSelector(this.featureSelector, (state: ItemWithEffectsState) => state.editItemId)
-    )
-  );
+  items$: Observable<Item[]> = this.itemsFacade.items$;
+  editItemId$: Observable<string> = this.itemsFacade.editItemId$;
 
   constructor(
-    private store: Store<fromFeature.State>) {
+    private itemsFacade: ItemsFacade,
+    private errorMessageFacade: ErrorMessageFacade
+  ) {
     this.cancelItemEdit();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(reloadItemsRequest());
+    this.itemsFacade.reloadItems();
   }
 
   saveItem(item: Item): void {
-    this.store.dispatch(saveItemRequest({ item }));
+    this.itemsFacade.saveItem(item);
   }
 
   editItem(itemId: string): void {
-    this.store.dispatch(editItem({ itemId }));
+    this.itemsFacade.editItem(itemId);
   }
 
   deleteItem(itemId: string): void {
-    this.store.dispatch(deleteItemRequest({ itemId }));
+    this.itemsFacade.deleteItem(itemId);
   }
 
   cancelItemEdit(): void {
-    this.store.dispatch(cancelEditItem());
+    this.itemsFacade.cancelItemEdit();
   }
 
   onFormError(errorMessage: string): void {
-    this.store.dispatch(setError({ errorMessage }));
+    this.errorMessageFacade.setError(errorMessage);
   }
 
   doClearError(): void {
-    this.store.dispatch(clearError());
+    this.errorMessageFacade.clearError();
   }
 
 }

@@ -5,8 +5,8 @@ import { ItemUiCoreModule } from '../item-ui-core/item-ui-core.module';
 import { ItemDataModule } from '../item-data/item-data.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ItemEffects } from './item.effects';
-import { itemsReducer } from './item.reducers';
+import { ItemEffects } from './state/item.effects';
+import { itemsReducer } from './state/item.reducers';
 import { ItemWithEffectsRouterModule } from './item-with-effects.routing';
 
 

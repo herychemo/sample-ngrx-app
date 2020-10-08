@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../item-data/services/data.service';
+import { DataService } from '../../item-data/services/data.service';
 import { Actions, createEffect, ofType} from '@ngrx/effects';
 import { deleteItemRequest, reloadItemsDone, reloadItemsRequest, saveItemRequest } from './item.actions';
 import { map, switchMap } from 'rxjs/operators';
-import { Item } from '../item-data/model/item';
+import { Item } from '../../item-data/model/item';
 
 @Injectable()
 export class ItemEffects {

@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import { Item } from '../item-data/model/item';
+import { Item } from '../../item-data/model/item';
 
 export const reloadItemsRequest = createAction('[Item][effects] Reload Items Request');
 export const reloadItemsDone = createAction('[Item][effects] Reload Items Done', props<{ items: Item[] }>());
